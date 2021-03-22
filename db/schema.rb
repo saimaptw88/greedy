@@ -55,13 +55,10 @@ ActiveRecord::Schema.define(version: 2021_03_21_132008) do
     t.integer "reachability"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "goal_id"
     t.bigint "user_id"
-    t.index ["goal_id"], name: "index_wants_on_goal_id"
     t.index ["user_id"], name: "index_wants_on_user_id"
   end
 
   add_foreign_key "goals", "users"
-  add_foreign_key "wants", "goals"
   add_foreign_key "wants", "users"
 end

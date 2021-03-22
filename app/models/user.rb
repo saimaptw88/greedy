@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :wants, dependent: :destroy
   has_one :goal, dependent: :destroy
   validates :email, presence: true, uniqueness: true
+  validates :password, presence: true
 end
