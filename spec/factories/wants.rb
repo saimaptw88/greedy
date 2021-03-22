@@ -5,6 +5,5 @@ FactoryBot.define do
     reachability { "#{Faker::Number.decimal_part(digits: 2)}%" }
 
     user
-    goal
   end
 end

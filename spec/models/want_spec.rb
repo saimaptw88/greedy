@@ -7,7 +7,7 @@ RSpec.describe Want, type: :model do
       @goal = create(:goal, user_id: @user.id)
     end
 
-    let(:want) { create(:want, user_id: @user.id, goal_id: @goal.id) }
+    let(:want) { create(:want, user_id: @user.id) }
 
     it "success" do
       expect(want).to be_valid
