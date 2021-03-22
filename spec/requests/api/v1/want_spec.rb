@@ -30,4 +30,32 @@ RSpec.describe "Api::V1::Wants", type: :request do
       expect(res.map {|i| i["id"] }).to eq @wants
     end
   end
+
+  describe "GET /api/v1/want/:id" do
+    subject { get(api_v1_want_path(want_id), headers: headers) }
+
+    before do
+      @user = create(:user)
+      @want = create(:want, user_id: @user.id)
+    end
+
+    let(:want_id) { @want.id }
+    let(:headers) { @user.create_new_auth_token }
+    let(:res) { JSON.parse(response.body) }
+
+    it "get httm request success" do
+      subject
+      expect(response).to have_http_status :ok
+    end
+
+    it "get my want" do
+      subject
+      expect(res["user"]["id"]).to eq @user.id
+    end
+
+    it "get specified want" do
+      subject
+      expect(res["id"]).to eq @want.id
+    end
+  end
 end
