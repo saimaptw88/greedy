@@ -28,6 +28,7 @@ gem "jbuilder", "~> 2.7"
 gem "active_model_serializers", "~> 0.10.0"
 gem "devise"
 gem "devise_token_auth"
+gem "rack-cors"
 gem "rails-erd"
 
 # Reduces boot times through caching; required in config/boot.rb
