@@ -16,6 +16,10 @@ ActiveRecord::Schema.define(version: 2021_03_21_132008) do
   enable_extension "plpgsql"
 
   create_table "goals", force: :cascade do |t|
+    t.string "name"
+    t.integer "priority"
+    t.integer "reachability"
+    t.integer "category_id"
     t.integer "deadline"
     t.text "why"
     t.datetime "created_at", precision: 6, null: false
@@ -50,9 +54,10 @@ ActiveRecord::Schema.define(version: 2021_03_21_132008) do
   end
 
   create_table "wants", force: :cascade do |t|
-    t.string "target"
+    t.string "name"
     t.integer "priority"
-    t.integer "reachability"
+    t.integer "reachability", default: 50
+    t.integer "category_id", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
