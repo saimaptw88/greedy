@@ -96,7 +96,7 @@ RSpec.describe "Api::V1::Wants", type: :request do
 
     it "change target" do
       subject
-      expect(res["target"]).to eq params[:want][:target]
+      expect(res["name"]).to eq params[:want][:name]
     end
 
     it "change priority" do

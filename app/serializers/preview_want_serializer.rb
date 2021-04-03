@@ -1,5 +1,5 @@
 class PreviewWantSerializer < ActiveModel::Serializer
-  attributes :id, :target, :priority, :reachability
+  attributes :id, :name, :priority, :reachability, :category_id
 
   belongs_to :user
 end

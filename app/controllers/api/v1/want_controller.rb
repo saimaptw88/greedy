@@ -29,6 +29,6 @@ class Api::V1::WantController < Api::V1::BaseApiController
     end
 
     def want_params
-      params.require(:want).permit(:target, :priority, :reachability)
+      params.require(:want).permit(:name, :priority, :reachability, :category_id)
     end
 end
