@@ -1,5 +1,4 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :email, :password
-
-  has_many :PreviewWantSerializer
+  # has_many :previewWants
 end
