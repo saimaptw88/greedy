@@ -34,14 +34,15 @@ RSpec.describe "Sessions", type: :request do
 
     let(:headers) { @user.create_new_auth_token }
     let(:params) { { email: @user.email, password: @user.password, password_confirmation: @user.password_confirmation } }
-    let(:login) { post(user_session_path, params: params, headers: headers) }
+
     it "success to logout" do
-      login
-      # binding.pry
       subject
-      # binding.pry
-      # expect(user.reload.tokens).to be_blank
       expect(response).to have_http_status(:ok)
+    end
+
+    it "user token deleted" do
+      subject
+      expect(@user.reload.tokens).to be_blank
     end
   end
 end
