@@ -2,6 +2,7 @@ class Api::V1::WantController < Api::V1::BaseApiController
   before_action :set_params, only: [:show, :update, :destroy]
   def index
     @wants = current_user.wants.order(priority: :asc)
+    @wants = @wants.each_with_index {|want, index| want.priority = index }
     render json: @wants, each_serializer: Api::V1::PreviewWantSerializer
   end
 
@@ -11,6 +12,7 @@ class Api::V1::WantController < Api::V1::BaseApiController
 
   def create
     @want = current_user.wants.create!(want_params)
+    render json: @want, serializer: Api::V1::PreviewWantSerializer
   end
 
   def update

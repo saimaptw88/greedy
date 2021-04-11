@@ -6,10 +6,9 @@ RSpec.describe "Api::V1::Wants", type: :request do
 
     before do
       @user = create(:user)
-      want1 = create(:want, user_id: @user.id, priority: 1)
-      want2 = create(:want, user_id: @user.id, priority: 2)
-      want3 = create(:want, user_id: @user.id, priority: 3)
-      @wants = [want1, want2, want3].map {|i| i["id"] }
+      3.times {|i| create(:want, user_id: @user.id, priority: i) }
+      create_list(:want, 3, user_id: @user.id)
+      @wants = @user.wants.order(priority: :asc).map(&:id)
     end
 
     let(:headers) { @user.create_new_auth_token }
@@ -22,7 +21,7 @@ RSpec.describe "Api::V1::Wants", type: :request do
 
     it "user id is mine" do
       subject
-      expect(res.map {|i| i["user"]["id"] }).to eq [@user.id, @user.id, @user.id]
+      expect(res.map {|i| i["user"]["id"] }).to eq [@user.id, @user.id, @user.id, @user.id, @user.id, @user.id]
     end
 
     it "my wants priority is asc" do
@@ -70,7 +69,7 @@ RSpec.describe "Api::V1::Wants", type: :request do
 
     it "get http recuest success" do
       subject
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:ok)
     end
 
     it "create want success" do
