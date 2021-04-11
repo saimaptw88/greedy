@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2021_03_21_132008) do
 
   create_table "wants", force: :cascade do |t|
     t.string "name"
-    t.integer "priority"
+    t.integer "priority", default: 0
     t.integer "reachability", default: 50
     t.integer "category_id", default: 1
     t.datetime "created_at", precision: 6, null: false
