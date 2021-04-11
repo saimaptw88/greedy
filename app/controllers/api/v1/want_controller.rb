@@ -11,6 +11,7 @@ class Api::V1::WantController < Api::V1::BaseApiController
   end
 
   def create
+    # priorityの設定
     @want = current_user.wants.create!(want_params)
     render json: @want, serializer: Api::V1::PreviewWantSerializer
   end
