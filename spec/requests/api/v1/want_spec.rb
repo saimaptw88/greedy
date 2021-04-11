@@ -61,7 +61,10 @@ RSpec.describe "Api::V1::Wants", type: :request do
   describe "POST /api/v1/want" do
     subject { post(api_v1_want_index_path, headers: headers, params: params) }
 
-    before { @user = create(:user) }
+    before do
+      @user = create(:user)
+      create_list(:want, 4, user_id: @user.id)
+    end
 
     let(:headers) { @user.create_new_auth_token }
     let(:params) { { want: attributes_for(:want) } }
@@ -74,6 +77,11 @@ RSpec.describe "Api::V1::Wants", type: :request do
 
     it "create want success" do
       expect { subject }.to change { Want.count }.by(1)
+    end
+
+    it "priority dose work" do
+      subject
+      expect(res["priority"]).to eq @user.wants.order(priority: :desc)[0].priority
     end
   end
 
@@ -100,7 +108,7 @@ RSpec.describe "Api::V1::Wants", type: :request do
 
     it "change priority" do
       subject
-      expect(res["priority"].to_s).to eq params[:want][:priority]
+      expect(res["priority"]).to eq params[:want][:priority]
     end
 
     it "this is my want" do
