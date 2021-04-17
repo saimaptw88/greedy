@@ -24,6 +24,8 @@ gem "jbuilder", "~> 2.7"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+gem "graphviz", "~> 0.4.0"
+gem "mimemagic", "~> 0.3.10"
 
 gem "active_model_serializers", "~> 0.10.0"
 gem "devise"

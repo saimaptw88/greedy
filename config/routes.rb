@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :want
+      # 要確認
+      patch "updates", to: "wants_update#update"
     end
   end
   mount_devise_token_auth_for "User", at: "auth", controllers: {

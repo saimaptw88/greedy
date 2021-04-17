@@ -6,7 +6,7 @@ RSpec.describe "Api::V1::Wants", type: :request do
 
     before do
       @user = create(:user)
-      3.times {|i| create(:want, user_id: @user.id, priority: i) }
+      create_list(:want, 3, user_id: @user.id)
       create_list(:want, 3, user_id: @user.id)
       @wants = @user.wants.order(priority: :asc).map(&:id)
     end
@@ -131,7 +131,7 @@ RSpec.describe "Api::V1::Wants", type: :request do
 
     it "get http response success" do
       subject
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:ok)
     end
 
     it "destroyed from db?" do
