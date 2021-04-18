@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2021_03_21_132008) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.index ["priority", "category_id"], name: "index_wants_on_priority_and_category_id", unique: true
     t.index ["user_id"], name: "index_wants_on_user_id"
   end
 
