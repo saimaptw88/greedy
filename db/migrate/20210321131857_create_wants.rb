@@ -7,6 +7,5 @@ class CreateWants < ActiveRecord::Migration[6.0]
       t.integer :category_id, default: 1
       t.timestamps
     end
-    add_index :wants, [:priority, :category_id], unique: true
   end
 end

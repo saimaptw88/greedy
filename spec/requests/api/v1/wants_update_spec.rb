@@ -26,17 +26,18 @@ RSpec.describe "Api::V1::WantsUpdates", type: :request do
 
     it "returns http success" do
       subject
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:no_content)
     end
 
     it "priority sort order asc is success" do
       subject
-      expect(res.map {|i| i["priority"] }).to eq @iwants.map(&:id)
+      wants = @user.wants.order(priority: :asc)
+      expect(wants.map(&:id)).to eq [3, 2, 1, 0]
     end
 
     it "id is not change and id sort is changed" do
       subject
-      expect(res.map {|i| i["id"] }).to eq [3, 2, 1, 0]
+      expect(@user.wants.order(priority: :asc).map {|i| i[:id] }).to eq [3, 2, 1, 0]
     end
   end
 end
