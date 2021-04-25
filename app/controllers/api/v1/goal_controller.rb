@@ -7,7 +7,7 @@ class Api::V1::GoalController < Api::V1::BaseApiController
   def create
     @wants = current_user.wants.all
     @wants.map do |want|
-      if (want.category_id == 1 && want.priority == 0)
+      if want.category_id == 1 && want.priority == 0
         @want = current_user.wants.find(want.id)
       end
     end
@@ -16,19 +16,20 @@ class Api::V1::GoalController < Api::V1::BaseApiController
   end
 
   def update
-    @goal.update(update_params)
+    @goal.update!(update_params)
     @want = current_user.wants.find(@goal.id)
-    @want.update(name: @goal.name)
+    @want.update!(name: @goal.name)
     render json: @goal
   end
 
   private
+
     def set_params
       @goal = current_user.goal
     end
 
     def goal_params
-      params.require(:goal).permit(:id,:name, :priority, :category_id)
+      params.require(:goal).permit(:id, :name, :priority, :category_id)
     end
 
     def update_params
