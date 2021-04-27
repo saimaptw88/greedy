@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_03_21_132008) do
     t.integer "category_id"
     t.integer "deadline"
     t.text "why"
+    t.text "every_day_task"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
