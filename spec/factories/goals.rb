@@ -9,6 +9,7 @@ FactoryBot.define do
     priority { Faker::Number.number(digits: 2) }
     category_id { array.sample }
     reachability { Faker::Number.number(digits: 2) }
+    every_day_task { "read book" }
 
     user
   end

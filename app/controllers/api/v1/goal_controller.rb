@@ -1,7 +1,7 @@
 class Api::V1::GoalController < Api::V1::BaseApiController
   before_action :set_params, only: [:show, :update]
   def show
-    render json: @goal
+    render json: @goal, seliarizer: Api::V1::GoalSerializer
   end
 
   def create
@@ -12,14 +12,16 @@ class Api::V1::GoalController < Api::V1::BaseApiController
       end
     end
     @goal = current_user.build_goal(id: @want.id, name: @want.name, category_id: @want.category_id, priority: @want.priority)
-    render json: @goal
+    @goal.save!
+    render json: @goal, seliarizer: Api::V1::GoalSerializer
   end
 
   def update
+    # binding.pry
     @goal.update!(update_params)
     @want = current_user.wants.find(@goal.id)
     @want.update!(name: @goal.name)
-    render json: @goal
+    render json: @goal, seliarizer: Api::V1::GoalSerializer
   end
 
   private
@@ -33,6 +35,6 @@ class Api::V1::GoalController < Api::V1::BaseApiController
     end
 
     def update_params
-      params.require(:goal).permit(:name, :deadline, :why, :reachability)
+      params.require(:goal).permit(:name, :deadline, :why, :reachability, :every_day_task)
     end
 end
