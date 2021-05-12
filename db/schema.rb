@@ -15,20 +15,6 @@ ActiveRecord::Schema.define(version: 2021_03_21_132008) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "goals", force: :cascade do |t|
-    t.string "name"
-    t.integer "priority"
-    t.integer "reachability"
-    t.integer "category_id"
-    t.integer "deadline"
-    t.text "why"
-    t.text "every_day_task"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_goals_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -57,12 +43,14 @@ ActiveRecord::Schema.define(version: 2021_03_21_132008) do
     t.integer "priority", default: 0
     t.integer "reachability", default: 50
     t.integer "category_id", default: 1
+    t.integer "deadline", default: 30
+    t.text "why"
+    t.text "every_day_task"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_wants_on_user_id"
   end
 
-  add_foreign_key "goals", "users"
   add_foreign_key "wants", "users"
 end
