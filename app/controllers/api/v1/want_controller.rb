@@ -50,6 +50,6 @@ class Api::V1::WantController < Api::V1::BaseApiController
     end
 
     def want_params
-      params.require(:want).permit(:name, :priority, :reachability, :category_id)
+      params.require(:want).permit(:name, :priority, :reachability, :category_id, :why, :deadline, :every_day_task)
     end
 end
